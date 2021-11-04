@@ -1,8 +1,7 @@
 class Face():
-    def __init__(self, fsolid=None, floops=[], is_inner=False):
+    def __init__(self, fsolid=None, floops=[]):
         self.FSolid = fsolid
         self.FLoops = floops
-        self.is_inner = is_inner
         
     def add_loop(self, loop):
         self.FLoops.append(loop)

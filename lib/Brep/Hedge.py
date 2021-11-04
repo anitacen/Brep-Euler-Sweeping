@@ -9,10 +9,14 @@ class Hedge():
         self.edge = edge
     def get_names(self):
         return self.vert1.name, self.vert2.name
+    def get_points(self):
+        return self.vert1.point, self.vert2.point
 
 class Edge():
     def __init__(self, hedge1=None, hedge2=None):
         self.hedge1 = hedge1
         self.hedge2 = hedge2
-        self.point1, self.point2 = hedge1.vert1.point, hedge1.vert2.point
-        self.name1, self.name2 = hedge1.vert1.name, hedge1.vert2.name
+    def get_names(self):
+        return self.hedge1.vert1.name, self.hedge1.vert2.name
+    def get_points(self):
+        return self.hedge1.vert1.point, self.hedge1.vert2.point

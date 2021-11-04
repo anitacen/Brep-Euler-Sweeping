@@ -1,7 +1,8 @@
 class Loop():
-    def __init__(self, lface=None, lhedge=None):
+    def __init__(self, lface=None, lhedge=None, is_inner=False):
         self.LFace = lface
         self.LHedge = lhedge
+        self.is_inner = is_inner
     
     def find_hedge_with_one_vert(self, vert):
         h_start, h_end = None, None

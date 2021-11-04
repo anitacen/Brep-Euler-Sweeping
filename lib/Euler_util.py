@@ -37,14 +37,20 @@ def print_solid(solid):
         i += 1
         j = 0
         for l in f.FLoops:
-            print("\tLoop # {}".format(j))
+            print("\tLoop # {} is_inner: {}".format(j, l.is_inner))
             j += 1
-            
-            h = l.LHedge
-            k = 0
-            if h != None:
-                while (h.next != l.LHedge):
-                    print("\t\tHedge # {}: {}".format(k, h.get_names()))
-                    k += 1
-                    h = h.next
-                print("\t\tHedge # {}: {}".format(k, h.get_names()))
+            print_loop(l)
+
+def print_loop(loop):
+    h = loop.LHedge
+    k = 0
+    if h != None:
+        while (h.next != loop.LHedge):
+            print("\t\tHedge # {}: {}".format(k, h.get_names()))
+            k += 1
+            h = h.next
+        print("\t\tHedge # {}: {}".format(k, h.get_names()))
+
+def print_verts(V):
+    for v in V:
+        print("\t{}".format(v.name))

@@ -3,6 +3,9 @@ class Vertex():
         # topology
         
         # geometry
-        self.point = point[:3]
-        self.name = point[-1]
+        if point != None:
+            self.point = point[:3]
+            self.name = point[-1]
+    
+
 
