@@ -6,6 +6,8 @@ class Face():
         
     def add_loop(self, loop):
         self.FLoops.append(loop)
+    def merge_loops(self, loops):
+        self.FLoops.extend(loops)
     def delete_loop(self, loop):
         self.FLoops.remove(loop)
     

@@ -72,30 +72,33 @@ def mef(vert1, vert2, loop):
 
     return new_face, new_loop, hedge1, hedge2
 
-def kemr(vert1, vert2, loop):
+def kemr(vert1, vert2, loop, face):
     # v  e f h r s
     # 0 -1 0 0 1 0
-    face = loop.LFace
     new_loop = Loop(lface=face)
     face.add_loop(new_loop)
     
     h_1_2, h_2_1 = loop.find_hedge_with_two_vert(vert1, vert2)
-    
-    # TODO
+    # print("from {} to {}".format(h_1_2.edge.name1, h_1_2.edge.name2))
+    # print("from {} to {}".format(h_2_1.edge.name1, h_2_1.edge.name2))
     link_two_hedge(h_2_1.prev, h_1_2.next)
     link_two_hedge(h_1_2.prev, h_2_1.next)
 
-    loop.LHedge = h_1_2.prev
-    new_loop.LHedge = h_1_2.next
-    # update hedges's HLoop
-    update_HLoop(new_loop)
-
-    remove_hedge(h_1_2)
-    remove_hedge(h_2_1)
+    if (h_1_2.vert1 == h_2_1.vert2 and h_1_2.vert2 == h_2_1.vert1):
+        loop.LHedge = h_1_2.prev
+        new_loop.LHedge = None
+        update_HLoop(new_loop)
+        remove_hedge(h_1_2)
+    else:
+        loop.LHedge = h_1_2.prev
+        new_loop.LHedge = h_1_2.next
+        update_HLoop(new_loop)
+        remove_hedge(h_1_2)
+        remove_hedge(h_2_1)
     return new_loop
 
 def kfmrh(in_face, out_face):
     in_face.is_inner = True
-    out_face.add_loop(in_face.FLoop)
+    out_face.merge_loops(in_face.FLoops)
     solid = in_face.FSolid
     solid.delete_face(in_face)

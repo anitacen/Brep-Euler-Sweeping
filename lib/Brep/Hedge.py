@@ -7,6 +7,8 @@ class Hedge():
         self.prev = prev
         self.next = next
         self.edge = edge
+    def get_names(self):
+        return self.vert1.name, self.vert2.name
 
 class Edge():
     def __init__(self, hedge1=None, hedge2=None):
