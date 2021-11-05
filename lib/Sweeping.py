@@ -1,25 +1,23 @@
-from lib.Euler import *
-from lib.Euler_util import *
+from lib import *
 from lib.Sweep_util import *
-from .Brep import *
 
-def Sweeping(sweep_vert, loop_main, loop_inner):
+def sweeping(sweep_vert, loop_main, loop_inner):
     # main loop sweeping
     V_init = get_vert_list(loop_main)
     P_sweep = [get_sweep_point(V_init[i], sweep_vert) for i in range(len(V_init))]
-    face_main, new_loop = Sweeping_loop(loop_main, V_init, P_sweep)
+    face_main, new_loop = sweeping_loop(loop_main, V_init, P_sweep)
     for loop in loop_inner:
         V_init = get_vert_list(loop)
         P_sweep = [get_sweep_point(V_init[i], sweep_vert) for i in range(len(V_init))]
-        new_face, new_loop = Sweeping_loop(loop, V_init, P_sweep)
+        new_face, new_loop = sweeping_loop(loop, V_init, P_sweep)
         kfmrh(new_face, face_main)
     return
 
-def Sweeping_loop(loop, V_init, P_sweep):
+def sweeping_loop(loop, V_init, P_sweep):
     V_sweep = [Vertex() for i in range(len(P_sweep))]
     for i in range(len(V_init)):
         V_sweep[i] = mev(V_init[i], P_sweep[i], loop)
-        V_sweep[i].name = V_init[i].name + "-sweep-"
+        V_sweep[i].name = V_init[i].name + "'"
     loop_empty = loop
     for i in range(1, len(V_init)):
         new_face, new_loop = mef(V_sweep[i], V_sweep[i-1], loop_empty)

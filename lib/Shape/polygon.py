@@ -1,4 +1,3 @@
-
 from lib.Brep import *
 from lib.Euler import *
 

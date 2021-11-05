@@ -1,24 +1,33 @@
 from lib.Shape import *
-from lib.Brep import *
-from lib.Euler import *
-from lib.Euler_util import *
-from lib.Sweeping import *
+from lib.Sweeping import sweeping
+from lib.Visual import visualize
+from lib.util import *
 
-P1  = [5,0,0, "1" ]
-P2  = [0,0,0, "2" ]
-P3  = [0,5,0, "3" ]
-P4  = [5,5,0, "4" ]
+outter = [
+    [5,0,0, "1" ],
+    [0,0,0, "2" ],
+    [0,5,0, "3" ],
+    [5,5,0, "4" ],
+    [7,3,0, "13"],
+]
+inner1 = [
+    [4,1,0, "5" ],
+    [4,2,0, "6" ],
+    [3,2,0, "7" ],
+    [3,1,0, "8" ],
+]
+inner2 = [
+    [2,1,0, "9"],
+    [2,4,0, "10"],
+    [1,4,0, "11"],
+    [1,1,0, "12"],
+]
 
 
-P5  = [4,1,0, "5"]
-P6  = [4,2,0, "6"]
-P7  = [3,2,0, "7"]
-P8  = [3,1,0, "8"]
-
-
-solid, face_down, face_empty, loop_down, loop_empty, [V1, V2, V3, V4] = make_polygon_with_point_list([P1, P2, P3, P4])
-loop_in_empty, [V5, V6, V7, V8] = make_ring_with_point_list([P5, P6, P7, P8], face_down, loop_down)
-
-Sweeping([0,0,5], loop_empty, [loop_in_empty])
-print("final")
+solid, face_down, face_up, loop_down, loop_up, V0 = make_polygon_with_point_list(outter)
+loop_in_1, V1 = make_ring_with_point_list(inner1, face_down, loop_down)
+loop_in_2, V2 = make_ring_with_point_list(inner2, face_up, loop_up)
+sweeping([0,0,5], loop_up, [loop_in_1])
+sweeping([0,0,-5], loop_down, [loop_in_2])
 print_solid(solid)
+visualize(solid)

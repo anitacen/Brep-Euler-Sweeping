@@ -6,6 +6,7 @@ class Vertex():
         if point != None:
             self.point = point[:3]
             self.name = point[-1]
+            
     
 
 
