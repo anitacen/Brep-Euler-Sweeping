@@ -1,5 +1,5 @@
-from lib import *
-from lib.Sweep_util import *
+from lib.Euler import *
+from lib.util.Sweep_util import *
 
 def sweeping(sweep_vert, loop_main, loop_inner):
     # main loop sweeping
@@ -17,7 +17,7 @@ def sweeping_loop(loop, V_init, P_sweep):
     V_sweep = [Vertex() for i in range(len(P_sweep))]
     for i in range(len(V_init)):
         V_sweep[i] = mev(V_init[i], P_sweep[i], loop)
-        V_sweep[i].name = V_init[i].name + "'"
+        V_sweep[i].name = V_init[i].name + "'s"
     loop_empty = loop
     for i in range(1, len(V_init)):
         new_face, new_loop = mef(V_sweep[i], V_sweep[i-1], loop_empty)

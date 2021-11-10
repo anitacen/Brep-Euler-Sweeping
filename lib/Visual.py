@@ -1,9 +1,8 @@
-from lib.Visual_util import VSolid
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from lib import *
+from lib.util.Visual_util import VSolid
 
 def display_solid(verts, edges, faces):
 
@@ -69,5 +68,4 @@ def get_face_vert_edge(solid):
         vsolid.update(edge)
     for face in solid.SFaces:
         vsolid.update_face(face)
-    print(vsolid.faces)
     return vsolid.verts, vsolid.edges, vsolid.faces

@@ -1,4 +1,4 @@
-from lib.Euler_util import *
+from lib.util.Euler_util import *
 
 def get_sweep_point(v, sweep_vert):
     point = v.point

@@ -4,8 +4,8 @@
 # h| handle
 # r| ring
 # s| solid
-from .Brep import *
-from .Euler_util import *
+from lib.Brep import *
+from lib.util.Euler_util import *
 
 def mvfs(point):
     # v e f h r s

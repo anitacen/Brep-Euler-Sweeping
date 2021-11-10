@@ -1,4 +1,4 @@
-from .Brep import *
+from lib.Brep import *
 
 def make_hedges_edge(vert1, vert2):
     # Given two verts
